@@ -1,0 +1,7 @@
+Tämä
+Tekstitiedosto
+sisältää tekstiä jonka avulla,
+voidaan testata
+toimiiko
+tämä mun
+pikku C-ohjelma
