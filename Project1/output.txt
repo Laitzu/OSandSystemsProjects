@@ -1,0 +1,8 @@
+pikku C-ohjelma
+Tämä on tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi pitkä rivi
+tämä mun
+toimiiko
+voidaan testata
+sisältää tekstiä jonka avulla,
+Tekstitiedosto
+Tämä
