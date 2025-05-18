@@ -14,7 +14,8 @@ typedef struct Lines
 FILE* openFile(char *fileName, char *mode);
 Lines* readLines(FILE *stream, Lines *lineStart);
 Lines* allocateMemory(Lines* node, size_t stringSize);
-void printNodes(Lines *listStart);
+void printNodes(Lines *head);
+void freeMemory(Lines *head);
 
 
 
@@ -33,14 +34,17 @@ int main(int argc, char *argv[]) {
         // Open file for reading
         file = openFile(argv[1], "r");
 
-        // Read lines from the file
+        // Read lines from the file and store them into a doubly linked list
         listStart = readLines(file, listStart);
 
         // Close file
         fclose(file);
+    } else if(argc == 1) {
+        listStart = readLines(stdin, listStart);
     }
 
     printNodes(listStart);
+    freeMemory(listStart);
 
     return 0;
 }
@@ -62,13 +66,15 @@ Lines* readLines(FILE* stream, Lines* listStart) {
     char *string = NULL;
     size_t size = 0;
     __ssize_t chars_read;
-    Lines* lineNode = NULL;
+    Lines *lineNode = NULL;
+    Lines *head = NULL;
 
-    // Read first line and save it to first node
+    // Read first line
     chars_read = getline(&string, &size, stream);
-
     // Allocate memory for first node depending on line (string) size
     listStart = allocateMemory(listStart, size);
+    // Save the head of the linked list for the future
+    head = listStart;
     // Store line in the node
     strcpy(listStart->string, string);
 
@@ -79,15 +85,16 @@ Lines* readLines(FILE* stream, Lines* listStart) {
         // Store string inside of the node
         strcpy(lineNode->string, string);
 
-        // Set relations for the previous node and current node
+        // Set relations for the previous node (listStart) and current node (lineNode)
         listStart->next = lineNode;
         lineNode->prev = listStart;
         // Set lineStart to be the current node for next iteration
         listStart = lineNode;
     }
-
-    // listStart is now the last node in the doubly linked list which is convenient for this task
-    return listStart;
+    // Free the dynamic memory string that getline used
+    free(string);
+    // Return the head of the doubly linked list containing the lines read
+    return head;
 }
 
 Lines* allocateMemory(Lines* node, size_t stringSize) {
@@ -104,10 +111,25 @@ Lines* allocateMemory(Lines* node, size_t stringSize) {
     return node;
 }
 
-void printNodes(Lines *listStart) {
-    // Iterate through the nodes of the list, conveniently listStart is the last node of the list
-    while(listStart->prev != NULL) {
-        printf("%s", listStart->string);
-        listStart = listStart->prev;
+void printNodes(Lines *head) {
+    // Iterate through the nodes of the list starting from the head
+    while(head->next != NULL) {
+        head = head->next;
+    }
+    while(head != NULL) {
+        printf("%s", head->string);
+        head = head->prev;
+    }
+}
+
+void freeMemory(Lines *head) {
+    // Iterate through the doubly linked list and free up the allocated memory
+    Lines *next = NULL;
+
+    while(head != NULL) {
+        next = head->next;
+        free(head->string);
+        free(head);
+        head = next;
     }
 }
