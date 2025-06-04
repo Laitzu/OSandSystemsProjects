@@ -1,0 +1,8 @@
+Tämä
+Tekstitiedosto
+sisältää tekstiä jonka avulla,
+voidaan testata
+toimiiko
+tämä mun
+Tämä on tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi tosi pitkä rivi
+pikku C-ohjelma
